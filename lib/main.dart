@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:githubUsers/ui/user_list/user_list_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,6 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -24,9 +27,25 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      //home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: UserListView(),
     );
   }
+}
+
+class MyBlocObserver extends BlocObserver {
+
+  @override
+  void onChange(BlocBase bloc, Change change){
+    super.onChange(bloc, change);
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition){
+    super.onTransition(bloc, transition);
+  }
+
+
 }
 
 class MyHomePage extends StatefulWidget {
