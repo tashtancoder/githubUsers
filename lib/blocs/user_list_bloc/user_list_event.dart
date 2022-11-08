@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 abstract class UserListEvent extends Equatable {
+
   const UserListEvent();
 
   @override
@@ -9,4 +10,7 @@ abstract class UserListEvent extends Equatable {
   }
 }
 
-class GetUserList extends UserListEvent {}
+class GetUserList extends UserListEvent {
+  //final int page;
+  GetUserList();
+}

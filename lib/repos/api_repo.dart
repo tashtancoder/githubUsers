@@ -5,8 +5,8 @@ import '../models/user_detail.dart';
 
 class ApiRepo {
   final _apiProvider = ApiProvider();
-  Future<List<User>> fetchUserList(int page){
-    return _apiProvider.fetchUserList(page);
+  Future<List<User>> fetchUserList(int sinceId){
+    return _apiProvider.fetchUserList(sinceId);
   }
 
   Future<UserDetails> fetchUserDetails(String userName){

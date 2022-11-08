@@ -13,11 +13,23 @@ abstract class UserListState extends Equatable {
 
 class UserListInitial extends UserListState {}
 
-class UserListLoading extends UserListState {}
+class UserListLoading extends UserListState {
+  final List<User> userList;
+  const UserListLoading(this.userList);
+  @override
+  List<Object> get props {
+    return [userList];
+  }
+}
 
 class UserListLoaded extends UserListState {
   final List<User> userList;
   const UserListLoaded(this.userList);
+
+  @override
+  List<Object> get props {
+    return [userList];
+  }
 }
 
 class UserListError extends UserListState {

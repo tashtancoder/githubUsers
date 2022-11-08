@@ -7,13 +7,13 @@ import 'package:http/http.dart';
 import '../models/user_detail.dart';
 
 class ApiProvider{
-  Future<List<User>> fetchUserList(int page) async {
-    final res = await get(Uri.parse(getUsersEndpoint + '?page=${page}'));
+  Future<List<User>> fetchUserList(int sinceId) async {
+    final res = await get(Uri.parse(getUsersEndpoint + '?since=${sinceId}'));
     if (res.statusCode == 200) {
       final List<dynamic> userListData = jsonDecode(res.body);
       return userListData.map((userData) => User.fromMap(userData)).toList();
     } else {
-      throw Exception('Error during userList Data on page ${page}');
+      throw Exception('Error during userList Data since  ${sinceId}');
 
     }
   }

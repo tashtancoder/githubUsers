@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:githubUsers/ui/pages/user_details_page.dart';
 import 'package:githubUsers/ui/user_list/user_list_view.dart';
 
+import 'ui/pages/user_list_page.dart';
+
 void main() {
+  Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
 
@@ -13,7 +18,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Github Users Demo',
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
@@ -27,8 +37,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      //home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: UserListView(),
+      home: UserListPage()
     );
   }
 }
