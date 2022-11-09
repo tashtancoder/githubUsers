@@ -6,6 +6,7 @@ import 'package:githubUsers/blocs/user_list_bloc/user_list_bloc.dart';
 import 'package:githubUsers/blocs/user_list_bloc/user_list_event.dart';
 import 'package:githubUsers/blocs/user_list_bloc/user_list_state.dart';
 import 'package:githubUsers/repos/api_provider.dart';
+import 'package:githubUsers/ui/pages/user_details_page.dart';
 import 'package:githubUsers/ui/user_details/user_details_view.dart';
 import 'package:githubUsers/ui/user_list/user_item_view.dart';
 
@@ -130,7 +131,7 @@ class UserListViewState extends State<UserListView> {
     Navigator.of(context).push(
         MaterialPageRoute(
             builder: (context) {
-              return UserDetailsView(userName: userName);
+              return UserDetailsPage(userName: userName);
             }
     ));
 

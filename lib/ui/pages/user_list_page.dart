@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:githubUsers/constants/colors.dart';
 import 'package:githubUsers/ui/user_list/user_list_view.dart';
 
 import '../../blocs/user_list_bloc/user_list_bloc.dart';
@@ -13,16 +14,14 @@ class UserListPage extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-              'Github Users'
-          ),
+          backgroundColor: appBackgroundColor,
+          title: Image.asset('assets/images/logo1.png', width: 50, height: 50,),
+          centerTitle: true,
         ),
         body: BlocProvider(
           create: (_) => UserListBloc()..add(GetUserList()),
           //create: (_) => _userListBloc,
           child: UserListView(),
-
-
         )
     );
   }
