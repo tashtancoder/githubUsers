@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:githubUsers/constants/endpoints.dart';
+import 'package:githubUsers/constants/credentials.dart';
 import 'package:githubUsers/models/User.dart';
 import 'package:http/http.dart';
 
