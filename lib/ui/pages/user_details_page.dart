@@ -15,7 +15,7 @@ class UserDetailsPage extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: appBackgroundColor,
+        backgroundColor: profileBackgroundColor,
         iconTheme: IconThemeData(
           color: Colors.black54
         ),

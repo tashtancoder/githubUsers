@@ -8,6 +8,9 @@ class UserDetails {
   final String company;
   final String email;
   final int publicRepos;
+  final int publicGists;
+  final String reposUrl;
+  final String gistsUrl;
   final int followersSize;
   final int followingSize;
   final DateTime createdAt;
@@ -23,6 +26,9 @@ class UserDetails {
     required this.company,
     required this.email,
     required this.publicRepos,
+    required this.publicGists,
+    required this.reposUrl,
+    required this.gistsUrl,
     required this.followersSize,
     required this.followingSize,
     required this.createdAt,
@@ -55,6 +61,9 @@ class UserDetails {
         company: data['company'] ?? '',
         email: data['email'] ?? '',
         publicRepos: data['public_repos'],
+        publicGists: data['public_gists'],
+        reposUrl: data['repos_url'] ?? '',
+        gistsUrl: data['gists_url'] ?? '',
         followersSize: data['followers'],
         followingSize: data['following'],
         createdAt: DateTime.parse(data['created_at']),

@@ -8,7 +8,7 @@ import '../models/user_detail.dart';
 
 class ApiProvider{
   Future<List<User>> fetchUserList(int sinceId) async {
-    final res = await get(Uri.parse(getUsersEndpoint + '?since=${sinceId}'), headers: headers);
+    final res = await get(Uri.parse(getUsersEndpoint + '?since=${sinceId}&per_page=${perPage}'), headers: headers);
     if (res.statusCode == 200) {
       final List<dynamic> userListData = jsonDecode(res.body);
       return userListData.map((userData) => User.fromMap(userData)).toList();

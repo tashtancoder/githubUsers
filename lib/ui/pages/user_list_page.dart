@@ -14,8 +14,11 @@ class UserListPage extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: appBackgroundColor,
-          title: Image.asset('assets/images/logo1.png', width: 50, height: 50,),
+          backgroundColor: profileBackgroundColor,
+          title: Hero(
+            tag: 'logo',
+            child: Image.asset('assets/images/logo1.png', width: 50, height: 50,),
+          ),
           centerTitle: true,
         ),
         body: BlocProvider(

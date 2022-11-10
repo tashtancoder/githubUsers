@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:githubUsers/constants/colors.dart';
+import 'package:githubUsers/ui/pages/splash_screen_page.dart';
 import 'package:githubUsers/ui/pages/user_details_page.dart';
 import 'package:githubUsers/ui/user_list/user_list_view.dart';
 
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: appBackgroundColor
       ),
-      home: UserListPage()
+      home: SplashScreenPage()
     );
   }
 }

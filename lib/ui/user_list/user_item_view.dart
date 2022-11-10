@@ -12,12 +12,16 @@ class UserItmView extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return ListTile(
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(
-            userItm.avatarUrl
+      leading: Hero(
+        tag: userItm.userName,
+        child: CircleAvatar(
+          backgroundImage: NetworkImage(
+              userItm.avatarUrl
+          ),
         ),
       ),
       title: Text(userItm.userName),
+      subtitle: Text(userItm.type),
       trailing: Icon(Icons.chevron_right),
       onTap: (){
         onTap(userItm.userName);
