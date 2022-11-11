@@ -43,7 +43,12 @@ class UserListBloc extends Bloc<UserListEvent, UserListState> {
       }
       emit(UserListLoaded(userList, isAllFetched));
     } on Exception catch (error) {
-      emit(UserListError('Error in network'));
+      print(error);
+      if (error.toString().contains('401')) {
+        emit(const UserListError('Bad Credentials, please renew Github API token'));
+      } else {
+        emit(const UserListError('Error in network'));
+      }
     }
   }
 

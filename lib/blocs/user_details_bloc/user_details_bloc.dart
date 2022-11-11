@@ -17,7 +17,11 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
       emit(UserDetailsLoaded(userDetails: userDetails));
 
     } on Exception catch (error) {
-      emit(UserDetailsError('Network error'));
+      if (error.toString().contains('401const ')) {
+        emit(const UserDetailsError('Bad Credentials, please renew Github API token'));
+      } else {
+        emit(const UserDetailsError('Error in network'));
+      }
 
     }
   }

@@ -23,7 +23,6 @@ class UserListView extends StatefulWidget {
 }
 
 class UserListViewState extends State<UserListView> {
-  //final UserListBloc _userListBloc = UserListBloc();
   final _scrollController = ScrollController();
   //List<User> userList = [];
 
@@ -34,15 +33,9 @@ class UserListViewState extends State<UserListView> {
       //print(_isEnd());
       if (_isEnd()){
         print('isEnd');
-        //_userListBloc.add(GetUserList());
         context.read<UserListBloc>().add(GetUserList());
       }
     });
-    //_userListBloc.add(GetUserList());
-    //context.read<UserListBloc>().add(GetUserList());
-    /*SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      getUsers();
-    });*/
   }
 
   @override
@@ -84,7 +77,7 @@ class UserListViewState extends State<UserListView> {
   Widget _listViewBuild(List<User> userList, bool isEndOfList){
     print('User List Size ${userList.length}');
     return ListView.separated(
-        padding: EdgeInsets.only(left: 10, top: 15, right: 10),
+        padding: const EdgeInsets.only(left: 10, top: 15, right: 10),
         shrinkWrap: true,
         itemBuilder: (BuildContext ctxt, int index){
            return index < userList.length ? UserItmView(
