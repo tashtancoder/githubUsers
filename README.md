@@ -1,6 +1,8 @@
 # github_users
 
-A new Flutter project.
+A Flutter project for Github Users Task.
+
+It is highly recommended to keep a valid Github API token.
 
 ## Getting Started
 
