@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:githubUsers/blocs/user_list_bloc/user_list_bloc.dart';
 import 'package:githubUsers/blocs/user_list_bloc/user_list_event.dart';
 import 'package:githubUsers/blocs/user_list_bloc/user_list_state.dart';
+import 'package:githubUsers/constants/colors.dart';
 import 'package:githubUsers/repos/api_provider.dart';
 import 'package:githubUsers/ui/pages/user_details_page.dart';
 import 'package:githubUsers/ui/user_details/user_details_view.dart';
@@ -56,10 +57,10 @@ class UserListViewState extends State<UserListView> {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state is UserListLoaded) {
-            return _listViewBuild(state.userList);
+          } else if (state is UserListLoaded) { // Show userList if loaded
+            return _listViewBuild(state.userList, state.isEndOfList);
           } else if (state is UserListLoading) {
-            return _listViewBuild(state.userList);
+            return _listViewBuild(state.userList, false);
           } else {
             return Center(
               child: Text(
@@ -68,20 +69,6 @@ class UserListViewState extends State<UserListView> {
             );
           }
 
-
-        /*if (state is UserListInitial || state is UserListLoading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (state is UserListLoaded){
-              return _listViewBuild(state.userList);
-            } else {
-              return Center(
-                child: Text(
-                  (state as UserListError).msg,
-                ),
-              );
-            } */
       },
     );
   }
@@ -94,7 +81,7 @@ class UserListViewState extends State<UserListView> {
     return _scrollController.offset >= maxScroll * 0.9;
   }
 
-  Widget _listViewBuild(List<User> userList){
+  Widget _listViewBuild(List<User> userList, bool isEndOfList){
     print('User List Size ${userList.length}');
     return ListView.separated(
         padding: EdgeInsets.only(left: 10, top: 15, right: 10),
@@ -110,19 +97,13 @@ class UserListViewState extends State<UserListView> {
                child: CircularProgressIndicator(strokeWidth: 1.5),
              ),
            );
-          /*return ListTile(
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(
-                  userList[index].avatarUrl
-                ),
-              ),
-              title: Text(userList[index].userName),
-            );*/
         },
         separatorBuilder: (ctxt, index){
-          return Divider();
+          return Divider(color: profileBackgroundColor,);
         },
-        itemCount: userList.length + 1,
+
+        // make itemCount userList+1 if all Github Users are not fetched yet
+        itemCount: isEndOfList ? userList.length : userList.length + 1,
         controller: _scrollController,
     );
   }

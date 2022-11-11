@@ -13,8 +13,8 @@ class UserDetails {
   final String gistsUrl;
   final int followersSize;
   final int followingSize;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  DateTime createdAt;
+  DateTime updatedAt;
   final String location;
   UserDetails({
     required this.userName,
@@ -37,20 +37,6 @@ class UserDetails {
   });
 
   factory UserDetails.fromMap(dynamic data){
-    /*final String login = data['login'];
-    final int id = data['id'] ?? 0;
-    final String avatarUrl = data['avatar_url'];
-    final String email = data['email'] ?? '';
-    final String type = data['type'] ?? '';
-    final String weblink = data['html_url'];
-    final String name = data['name'];
-    final String company = data['company'];
-    final int publicrepos = data['public_repos'];
-    final int followersize = data['followers'];
-    final int followingsize = data['following'];
-    final DateTime created = DateTime.parse(data['created_at']);
-    final DateTime updated = DateTime.parse(data['updated_at']);
-    final String location = data['location'];*/
     return UserDetails(
         userName: data['login'],
         id: data['id'],
@@ -66,8 +52,8 @@ class UserDetails {
         gistsUrl: data['gists_url'] ?? '',
         followersSize: data['followers'],
         followingSize: data['following'],
-        createdAt: DateTime.parse(data['created_at']),
-        updatedAt: DateTime.parse(data['updated_at']),
+        createdAt: DateTime.parse(data['created_at'] ?? ''),
+        updatedAt: DateTime.parse(data['updated_at'] ?? ''),
         location: data['location'] ?? ''
     );
   }

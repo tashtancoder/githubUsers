@@ -21,10 +21,6 @@ class UserListBloc extends Bloc<UserListEvent, UserListState> {
   List<User> userList = <User>[];
   final ApiRepo _apiRepo = ApiRepo();
   UserListBloc() : super(UserListInitial()) {
-    /*on<GetUserList>(
-        _fetchOnEvent,
-        transformer: throttleDroppable(throttleTime)
-    ); */
 
     on<GetUserList>(
             (event, emit) => _fetchOnEvent(event, emit),
@@ -39,15 +35,14 @@ class UserListBloc extends Bloc<UserListEvent, UserListState> {
     try {
       print('SinceId ${sinceId}');
       emit(UserListLoading(userList));
-      final userListForPage = await _apiRepo.fetchUserList(sinceId);
-      isAllFetched = userListForPage.isEmpty;
-      userList.addAll(userListForPage);
-      sinceId = userList.last.id;
-      print('UserListSize ${userList.length}');
-      //await Future<void>.delayed(const Duration(milliseconds: 100));
-      emit(UserListLoaded(userList));
+      if (!isAllFetched){
+        final userListForPage = await _apiRepo.fetchUserList(sinceId);
+        isAllFetched = userListForPage.isEmpty;
+        userList.addAll(userListForPage);
+        sinceId = userList.last.id;
+      }
+      emit(UserListLoaded(userList, isAllFetched));
     } on Exception catch (error) {
-      print(error);
       emit(UserListError('Error in network'));
     }
   }

@@ -7,6 +7,7 @@ import 'package:githubUsers/blocs/user_details_bloc/user_details_event.dart';
 import 'package:githubUsers/blocs/user_details_bloc/user_details_state.dart';
 import 'package:githubUsers/constants/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserDetailsView extends StatefulWidget {
   //final String userName;
@@ -51,7 +52,7 @@ class UserDetailsWidgetState extends State<UserDetailsView> {
                         radius: 100,
                         backgroundImage: NetworkImage(state.userDetails.avatarUrl),
                       ),
-                    ),
+                    ), // Show avatar
 
                     const SizedBox(height: 20,),
                     Text(
@@ -61,7 +62,7 @@ class UserDetailsWidgetState extends State<UserDetailsView> {
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
-                    ),
+                    ), // Show name
                     Text(
                       state.userDetails.type,
                       style: const TextStyle(
@@ -69,7 +70,7 @@ class UserDetailsWidgetState extends State<UserDetailsView> {
                           fontSize: 16,
                           fontWeight: FontWeight.w500
                       ),
-                    ),
+                    ), // Show user type
                     SizedBox(
                       height: 10,
                     ),
@@ -92,15 +93,15 @@ class UserDetailsWidgetState extends State<UserDetailsView> {
                                 state.userDetails.publicRepos.toString(),
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white
                                 ),
                               ),
-                              subtitle: const Text(
-                                'Repos',
+                              subtitle: Text(
+                                AppLocalizations.of(context)!.repos,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white
@@ -126,15 +127,15 @@ class UserDetailsWidgetState extends State<UserDetailsView> {
                                 state.userDetails.publicGists.toString(),
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white
                                 ),
                               ),
-                              subtitle: const Text(
-                                'Gists',
+                              subtitle: Text(
+                                AppLocalizations.of(context)!.gists,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white
@@ -145,11 +146,11 @@ class UserDetailsWidgetState extends State<UserDetailsView> {
                         ),
 
                       ],
-                    ),
-                    SizedBox(
+                    ), // Show repos and gists as buttons
+                    const SizedBox(
                       height: 20,
                     ),
-                    Row(
+                    Row( // show followings and followers
                       children: [
                         Expanded(
                           child: Container(
@@ -172,16 +173,16 @@ class UserDetailsWidgetState extends State<UserDetailsView> {
                                 state.userDetails.followersSize.toString(),
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w500
                                 ),
                               ),
-                              subtitle: const Text(
-                                'Followers',
+                              subtitle: Text(
+                                AppLocalizations.of(context)!.followers,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 15,
-                                    fontWeight: FontWeight.w400
+                                    fontWeight: FontWeight.w500
                                 ),
                               ),
                             ),
@@ -202,16 +203,16 @@ class UserDetailsWidgetState extends State<UserDetailsView> {
                                 state.userDetails.followingSize.toString(),
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w500
                                 ),
                               ),
-                              subtitle: const Text(
-                                'Following',
+                              subtitle: Text(
+                                AppLocalizations.of(context)!.following,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 15,
-                                    fontWeight: FontWeight.w400
+                                    fontWeight: FontWeight.w500
                                 ),
                               ),
                             ),
@@ -219,68 +220,70 @@ class UserDetailsWidgetState extends State<UserDetailsView> {
                         )
 
                       ],
-                    ),
+                    ), // Show following and followers
                   ],
                 ),
-              ),
-              Container(
-                child: Column(
-                  children: [
-                    ListTile(
-                      leading: const Icon(FontAwesomeIcons.github),
-                      title: Text(
-                        '@${state.userDetails.userName}',
-                        style: const TextStyle(
+              ), // Show avata, name, type, repos, gists, following and followers
+              Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(FontAwesomeIcons.github),
+                    title: Text(
+                      '@${state.userDetails.userName}',
+                      style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w400
-                        ),
                       ),
-                      trailing: const Icon(Icons.chevron_right),
-                      onTap: () async => {
-                        if (await canLaunchUrl(Uri.parse(state.userDetails.webLink))) {
-                          await launchUrl(Uri.parse(state.userDetails.webLink))
-                        }
-
-                      },
                     ),
-                    const Divider(),
-                    if (state.userDetails.email.isNotEmpty) ListTile(
-                      leading: const Icon(Icons.mail),
-                      title: Text(
-                        state.userDetails.email,
-                        style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400
-                        ),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () async => {
+                      if (await canLaunchUrl(Uri.parse(state.userDetails.webLink))) {
+                        await launchUrl(Uri.parse(state.userDetails.webLink))
+                      }
+
+                    },
+                  ), // Show github login with navigating to github profile page on tap
+                  Divider(color: profileBackgroundColor,),
+
+                  // Show email with navigating to default mail app on tap
+                  if (state.userDetails.email.isNotEmpty) ListTile(
+                    leading: const Icon(Icons.mail),
+                    title: Text(
+                      state.userDetails.email,
+                      style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400
                       ),
-                      trailing: const Icon(Icons.chevron_right),
-                      onTap: () async => {
-                        if (await canLaunchUrl(Uri.parse('mailto:${state.userDetails.email}'))) {
-                          await launchUrl(Uri.parse('mailto:${state.userDetails.email}'))
-                        }
-                      },
-                    ) else Container(),
-                    if (state.userDetails.email.isNotEmpty) const Divider() else Container(),
-                    if (state.userDetails.location.isNotEmpty) ListTile(
-                      leading: const Icon(Icons.location_on),
-                      title: Text(
-                        state.userDetails.location,
-                        style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400
-                        ),
+                    ),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () async => {
+                      if (await canLaunchUrl(Uri.parse('mailto:${state.userDetails.email}'))) {
+                        await launchUrl(Uri.parse('mailto:${state.userDetails.email}'))
+                      }
+                    },
+                  ) else Container(),
+                  if (state.userDetails.email.isNotEmpty) const Divider() else Container(),
+
+                  // Show location info with navigating to google.com/maps on tap
+                  if (state.userDetails.location.isNotEmpty) ListTile(
+                    leading: const Icon(Icons.location_on),
+                    title: Text(
+                      state.userDetails.location,
+                      style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400
                       ),
-                      trailing: const Icon(Icons.chevron_right),
-                      onTap: () async => {
-                        if (await canLaunchUrl(Uri.parse('https://www.google.com/maps/search/${Uri.encodeFull(state.userDetails.location)}'))) {
-                          await launchUrl(Uri.parse('https://www.google.com/maps/search/${Uri.encodeFull(state.userDetails.location)}'))
-                        }
-                      },
-                    ) else Container(),
-                    if (state.userDetails.location.isNotEmpty) const Divider() else Container(),
-                  ],
-                ),
-              )
+                    ),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () async => { // show on maps on google.com
+                      if (await canLaunchUrl(Uri.parse('https://www.google.com/maps/search/${Uri.encodeFull(state.userDetails.location)}'))) {
+                        await launchUrl(Uri.parse('https://www.google.com/maps/search/${Uri.encodeFull(state.userDetails.location)}'))
+                      }
+                    },
+                  ) else Container(),
+                  if (state.userDetails.location.isNotEmpty) const Divider() else Container(),
+                ],
+              ), // Show github login, email, place if exist
 
             ],
           );

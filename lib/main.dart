@@ -5,6 +5,7 @@ import 'package:githubUsers/constants/colors.dart';
 import 'package:githubUsers/ui/pages/splash_screen_page.dart';
 import 'package:githubUsers/ui/pages/user_details_page.dart';
 import 'package:githubUsers/ui/user_list/user_list_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'ui/pages/user_list_page.dart';
 
@@ -21,11 +22,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Github Users Demo',
-      localizationsDelegates: [
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate
       ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ru'),
+        Locale('ky')
+      ],
+      //locale: const Locale('en'),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.

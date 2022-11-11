@@ -24,11 +24,12 @@ class UserListLoading extends UserListState {
 
 class UserListLoaded extends UserListState {
   final List<User> userList;
-  const UserListLoaded(this.userList);
+  final bool isEndOfList;
+  const UserListLoaded(this.userList, this.isEndOfList);
 
   @override
   List<Object> get props {
-    return [userList];
+    return [userList, isEndOfList];
   }
 }
 

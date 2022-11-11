@@ -1,0 +1,8 @@
+{
+    "user": "User",
+    "followers": "Followers",
+    "following": "Following",
+    "repos": "Repos",
+    "gists": "Gists",
+    "welcome_msg": "Welcome to Github Users"
+}
